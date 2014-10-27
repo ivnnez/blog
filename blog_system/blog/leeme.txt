@@ -1,0 +1,3 @@
+despues de iniciado el entorno virtual hacer esto en la consola antes de correr a django-admin.py runserver o python manage.py runserver
+export DJANGO_SETTINGS_MODULE="blog_system.settings"
+export PYTHONPATH="$PYTHONPATH:'pwd'"

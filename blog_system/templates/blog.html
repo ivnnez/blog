@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{%block title%} {{blog}} {%endblock%}
+{%block tags%}{% for ta in tag %}
+<meta property= "{{blog.title}}" content="{{ta.nombretag}}" />{% endfor %}
+{%endblock%}
+{%block RecentWorks%}
+<center>
+	<h1 itemscope itemprop="titlulo">{{ blog }}</h1>
+	<img itemprop="imagen" src='{{  blog.imagen.url }}'/>
+	<h1><small itemprop="datePublished">{{ blog.time }}</small></h1>
+</center>
+<h3>
+	{{ blog.perex|safe }}
+</h3>
+<p align="justify">
+	<h6>
+	{{ blog.content|safe }}
+	</h6>
+</p>
+<br><br>    
+<a class="btn-u" href="/">
+	Regresar
+</a>
+
+{% endblock %}
+{% block Comentarios %}
+{% if comentarios != '' %}
+    <hr/> 
+    <center><h2>Comentarios</h2></center>
+    <hr/>
+    {% for c in comentarios reversed %}
+        <p align="justify">
+        <h5>{{ c.nombre }} dice:
+            <small itemprop="datePublished">
+            {{c.fecha_pub}}
+            </small>
+            
+        </h5>
+            {{ c.cuerpo }}
+        </p>
+        <hr/>    
+    {% endfor %}
+
+
+<form  action="."  method= "POST">{% csrf_token %}
+    <ul >
+        {{ form.as_ul }}
+    </ul>
+<input class="btn-u" type ="submit" name = "submit" value="Comentar"> </form>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endif %}
+{% endblock Comentarios %}
+    
+{%block RecentBlogs%}
+<!-- Recent Blogs -->
+                    <div class="posts">
+                        <div class="headline"><h2>Lo más reciente</h2></div>
+
+                        {% for blog in blogsRecientes%}
+                            <dl class="dl-horizontal">
+                                <dt><a href="#"><img src="{{  blog.imagen.url }}" alt=""></a></dt>
+                                <dd>
+                                    <p><a href="/blog/{{ blog.id }}">{{ blog }}</a></p>
+                                </dd>
+                            </dl>                               
+                        {% endfor %}
+
+                    </div>
+                    <!-- End Recent Blogs -->
+
+
+{%endblock%}
