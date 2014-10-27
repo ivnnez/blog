@@ -6,7 +6,7 @@ PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
 #PROJECT_DIR= os.path.realpath(os.path.dirname(__file__))
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates'),
+    os.path.join(PROJECT_PATH, 'templates'),
 )
 
 #MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
