@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-import settings
-
+from blog_system import settings
+from blog.feeds import EntradasFeed
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^contacto/$','blog.views.contacto_view',name='vista_contacto'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    url(r'^feeds/$', EntradasFeed()),
 )
