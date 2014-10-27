@@ -9,8 +9,17 @@ from django.template import RequestContext
 
 from django.core.mail import EmailMultiAlternatives
 
+from django.conf import settings
+
 def base(request):
-	return TemplateResponse(request,"base.html",{})
+	Descripcion = settings.SITE_DESCRIPTION
+	Locale = settings.SITE_LOCALE
+	Type = settings.SITE_TYPE
+	Title = settings.SITE_TITLE
+	Url = settings.SITE_URL
+	Image = settings.SITE_IMAGE
+	print Image
+	return TemplateResponse(request,"base.html",{'Descripcion':Descripcion, 'Locale':Locale, 'Type':Type, 'Title':Title, 'Url':Url, 'Image':Image})
 
 def home(request):
 	cate = categoria.objects.all()
@@ -52,32 +61,6 @@ def blog(request, id_blog):
 	else:
 		comenta= ''
 	return TemplateResponse(request, "blog.html", {'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta})
-
-'''#def comentar(request, id_blog):
-#from pdb import set_trace; set_trace()
-	if request.method=="POST":
-		form = ComentarioForm(request.POST)
-		info = 'inicializando'
-		if form.is_valid():
-			nombre = form.cleaned_data['nombre']
-			cuerpo = form.cleaned_data['cuerpo']
-			ct = comentarios()
-			ct.nombre = nombre
-			ct.Blog = Blog.objects.get(id=id_blog)
-			ct.cuerpo=cuerpo
-			ct.save()
-			info = 'se guardo satisfactoriamente'
-			return TemplateResponse(request, "comentar.html",{'ct':ct,'id_blog':id_blog})
-		else:
-			info = ' informacion con datos incorrectos'
-		form = ComentarioForm()
-		ctx = {'form':form,'info':info,'id_blog':id_blog}
-		return render_to_response('comentar.html',ctx,context_instance=RequestContext(request))			
-	else:
-		form = ComentarioForm()
-		ctx = {'form':form, 'id_blog':id_blog}
-	return render_to_response('comentar.html',ctx,context_instance=RequestContext(request))	
-'''
 
 def categorias(request,id_categoria):
 	blogsP1 = Blog.objects.filter(status='P',position='1',categoria=id_categoria).order_by('time').reverse()[:2]
