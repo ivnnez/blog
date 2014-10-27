@@ -28,7 +28,7 @@
     <hr/> 
     <center><h2>Comentarios</h2></center>
     <hr/>
-    {% for c in comentarios reversed %}
+    {% for c in comentarios %}
         <p align="justify">
         <h5>{{ c.nombre }} dice:
             <small itemprop="datePublished">
@@ -48,26 +48,6 @@
     </ul>
 <input class="btn-u" type ="submit" name = "submit" value="Comentar"> </form>
 <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endif %}
 {% endblock Comentarios %}
     
