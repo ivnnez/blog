@@ -6,4 +6,16 @@ first commit
 my second commit
 
 
-hola soy juan 
+h
+o
+l
+a 
+
+s
+o
+y 
+
+j
+u
+a
+n 
