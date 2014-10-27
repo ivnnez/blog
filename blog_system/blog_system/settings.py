@@ -1,9 +1,9 @@
 # Django settings for blog_system project.
 
 import os
-#PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
+PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
 
-PROJECT_DIR= os.path.realpath(os.path.dirname(__file__))
+#PROJECT_DIR= os.path.realpath(os.path.dirname(__file__))
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates'),
@@ -59,7 +59,7 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 #MEDIA_ROOT = '/home/ever/VIR/blog/blog_system/media'
-MEDIA_ROOT = os.path.join(PROJECT_DIR,'media')
+MEDIA_ROOT = os.path.join(PROJECT_PATH,'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
