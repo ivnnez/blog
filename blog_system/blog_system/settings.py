@@ -176,3 +176,11 @@ LOGGING = {
         },
     }
 }
+
+#Dynamic meta tags
+SITE_DESCRIPTION = 'en_US'
+SITE_LOCALE = 'article'
+SITE_TYPE = 'Blog Dubalu'
+SITE_TITLE = 'Blog Dubalu'
+SITE_URL = 'http://www.dubalu.com/'
+SITE_IMAGE ='http://www.dubalu.com/'
