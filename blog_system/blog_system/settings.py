@@ -78,9 +78,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_PATH, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -138,6 +136,7 @@ INSTALLED_APPS = (
     'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',
     'django.contrib.admin',
+    'taggit',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -184,3 +183,5 @@ SITE_TYPE = 'Blog Dubalu'
 SITE_TITLE = 'Blog Dubalu'
 SITE_URL = 'http://www.dubalu.com/'
 SITE_IMAGE ='http://www.dubalu.com/'
+
+MAX_NUMBER_OF_RESULTS = 10
