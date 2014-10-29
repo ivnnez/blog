@@ -1,12 +1,7 @@
 from django.db import models
 from taggit_autosuggest.managers import TaggableManager
-
-class categoria(models.Model):
-    nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
-
-    def __unicode__(self):
-        return self.nombre
+#from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
 
 
 POSITION_CHOICES = (
@@ -22,6 +17,14 @@ STATUS_CHOICES = (
 )
 
 
+class TaggedCategory(TaggedItemBase):
+    content_object = models.ForeignKey('Blog')
+
+
+class TaggedTag(TaggedItemBase):
+    content_object = models.ForeignKey('Blog')
+
+
 class Blog(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
@@ -31,9 +34,10 @@ class Blog(models.Model):
     imagen = models.ImageField(upload_to='photos')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     position = models.CharField(max_length=1, choices=POSITION_CHOICES)
-    categoria = models.ManyToManyField(categoria, null=True, blank=True)
+    categoria = TaggableManager(through=TaggedCategory)
+    categoria.rel.related_name = '+'
     comentar = models.BooleanField(default=True)
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(through=TaggedTag)
 
     @models.permalink
     def get_absolute_url(self):
