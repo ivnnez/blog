@@ -1,7 +1,14 @@
 # Create your views here.
+<<<<<<< HEAD
 from django.template.response import  TemplateResponse
 from django.shortcuts import get_object_or_404 
 from blog.models import Blog, categoria, comentarios, rating #poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
+=======
+from django.template.response import TemplateResponse
+from django.shortcuts import get_object_or_404
+from blog.models import Blog, categoria, \
+    comentarios  # poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
+>>>>>>> 4ea6fe9b9cef71954a51b23d3e519bf1558579fd
 
 from django.shortcuts import render_to_response
 from forms import ComentarioForm, ContactForm
@@ -11,26 +18,34 @@ from django.core.mail import EmailMultiAlternatives
 
 from django.conf import settings
 
+<<<<<<< HEAD
 from django.db.models import Sum
+=======
+>>>>>>> 4ea6fe9b9cef71954a51b23d3e519bf1558579fd
 
 def base(request):
-	Descripcion = settings.SITE_DESCRIPTION
-	Locale = settings.SITE_LOCALE
-	Type = settings.SITE_TYPE
-	Title = settings.SITE_TITLE
-	Url = settings.SITE_URL
-	Image = settings.SITE_IMAGE
-	print Image
-	return TemplateResponse(request,"base.html",{'Descripcion':Descripcion, 'Locale':Locale, 'Type':Type, 'Title':Title, 'Url':Url, 'Image':Image})
+    Descripcion = settings.SITE_DESCRIPTION
+    Locale = settings.SITE_LOCALE
+    Type = settings.SITE_TYPE
+    Title = settings.SITE_TITLE
+    Url = settings.SITE_URL
+    Image = settings.SITE_IMAGE
+    print Image
+    return TemplateResponse(request, "base.html",
+                            {'Descripcion': Descripcion, 'Locale': Locale, 'Type': Type, 'Title': Title, 'Url': Url,
+                             'Image': Image})
+
 
 def home(request):
-	cate = categoria.objects.all()
-	#filtramos los blogs para no enviar todo a la pagina ordenamos 'time' para enviar los mas recientes
-	blogsP1 = Blog.objects.filter(status='P',position='1').order_by('time').reverse()[:1]
-	blogsP2 = Blog.objects.filter(status='P',position='2').order_by('time').reverse()[:4]
-	blogsP3 = Blog.objects.filter(status='P',position='3').order_by('time').reverse()[:4]
-	blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
-	return TemplateResponse(request, "home.html", {'blogsP1':blogsP1,'blogsP2':blogsP2,'blogsP3':blogsP3,'blogsRecientes':blogsRecientes,'cate':cate})
+    cate = categoria.objects.all()
+    # filtramos los blogs para no enviar todo a la pagina ordenamos 'time' para enviar los mas recientes
+    blogsP1 = Blog.objects.filter(status='P', position='1').order_by('time').reverse()[:1]
+    blogsP2 = Blog.objects.filter(status='P', position='2').order_by('time').reverse()[:4]
+    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('time').reverse()[:4]
+    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    return TemplateResponse(request, "home.html", {'blogsP1': blogsP1, 'blogsP2': blogsP2, 'blogsP3': blogsP3,
+                                                   'blogsRecientes': blogsRecientes, 'cate': cate})
+
 
 def blog(request, id_blog):
 	blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
@@ -76,34 +91,37 @@ def categorias(request,id_categoria):
 	blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
 	cate = categoria.objects.all()
 	return TemplateResponse(request, "home.html", {'cate':cate,'blogsP1':blogsP1,'blogsP2':blogsP2,'blogsP3':blogsP3,'blogsRecientes':blogsRecientes})
+
 def demo(request):
-	cate = categoria.objects.all()
-	return TemplateResponse(request, "demo.html", {'blogs': Blog.objects.all(),'cate':cate})
+    cate = categoria.objects.all()
+    return TemplateResponse(request, "demo.html", {'blogs': Blog.objects.all(), 'cate': cate})
+
 
 def contacto_view(request):
-	blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
-	cate = categoria.objects.all()
-	info_enviado = False #definir si se envio la informacion
-	email = ""
-	titulo = ""
-	texto = ""
+    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    cate = categoria.objects.all()
+    info_enviado = False  # definir si se envio la informacion
+    email = ""
+    titulo = ""
+    texto = ""
 
-	if request.method == "POST":
-		formulario = ContactForm(request.POST)
-		if formulario.is_valid():
-			info_enviado = True
-			email = formulario.cleaned_data['Email']
-			titulo = formulario.cleaned_data['Titulo']
-			texto = formulario.cleaned_data['Texto']
+    if request.method == "POST":
+        formulario = ContactForm(request.POST)
+        if formulario.is_valid():
+            info_enviado = True
+            email = formulario.cleaned_data['Email']
+            titulo = formulario.cleaned_data['Titulo']
+            texto = formulario.cleaned_data['Texto']
 
-			#enviando gmail
-			to_admin ='pruebashordeipi@gmail.com'
-			html_content = "Informacion recibida <br><br><br>***Mensaje**<br><br>%s"%(texto)
-			msg = EmailMultiAlternatives('correo de contacto',html_content,'from@server.com',[to_admin])
-			msg.attach_alternative(html_content,"text/html")
-			msg.send()
+            # enviando gmail
+            to_admin = 'pruebashordeipi@gmail.com'
+            html_content = "Informacion recibida <br><br><br>***Mensaje**<br><br>%s" % (texto)
+            msg = EmailMultiAlternatives('correo de contacto', html_content, 'from@server.com', [to_admin])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
 
-	else:
-			formulario = ContactForm()
-	ctx = {'form':formulario,'email':email,'titulo':titulo,'texto':texto,'info_enviado':info_enviado, 'blogsRecientes':blogsRecientes,'cate':cate}
-	return render_to_response('contacto.html',ctx,context_instance=RequestContext(request))
+    else:
+        formulario = ContactForm()
+    ctx = {'form': formulario, 'email': email, 'titulo': titulo, 'texto': texto, 'info_enviado': info_enviado,
+           'blogsRecientes': blogsRecientes, 'cate': cate}
+    return render_to_response('contacto.html', ctx, context_instance=RequestContext(request))

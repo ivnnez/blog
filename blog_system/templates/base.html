@@ -13,14 +13,27 @@
     <meta name="description" content="Latino iConnect is a digital marketing conference that it is going to be hosted at Sony Electronics Inc. in San Diego on March 5, 2014."/>
     <link rel="canonical" href="http://latinoiconnect.com/" />
 <!--impresion de tags de cada uno de los blogs-->
+
+<!-- blogsP1 -->
     {% if blogsP1 %}
-    {% for blog in blogsP1 %}{%for tag in blog.tag.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
-    {% endfor %}{%endfor%}{% endif %}{% if blogsP2 %}
-    {% for blog in blogsP2 %}{%for tag in blog.tag.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
-    {% endfor %}{%endfor%}{% endif %}{% if blogsP3 %}
-    {% for blog in blogsP3 %}{%for tag in blog.tag.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
-    {% endfor %}{%endfor%}{% endif %}{% if blogsRecientes %}
-    {% for blog in blogsRecientes %}{%for tag in blog.tag.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
+        {% for blog in blogsP1 %}
+            {%for tag in blog.tags.all%}
+                <meta name="{{blog.title}}"content="{{tag}}"/>
+            {% endfor %}
+        {%endfor%}
+    {% endif %}
+
+<!-- blogsP2 -->
+    {% if blogsP2 %}
+    {% for blog in blogsP2 %}{%for tag in blog.tags.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
+    {% endfor %}{%endfor%}{% endif %}
+<!-- blogsP3 -->
+    {% if blogsP3 %}
+    {% for blog in blogsP3 %}{%for tag in blog.tags.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
+    {% endfor %}{%endfor%}{% endif %}
+<!-- blogRecientes -->
+    {% if blogsRecientes %}
+    {% for blog in blogsRecientes %}{%for tag in blog.tags.all%}<meta name="{{blog.title}}"content="{{tag}}"/>
     {% endfor %}{%endfor%}{% endif %}
 
 {%block tags%}{%endblock%}
