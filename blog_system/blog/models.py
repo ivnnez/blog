@@ -1,5 +1,5 @@
 from django.db import models
-from taggit.managers import TaggableManager
+from taggit_autosuggest.managers import TaggableManager
 
 class categoria(models.Model):
     nombre = models.CharField(max_length=100)
@@ -33,7 +33,7 @@ class Blog(models.Model):
     position = models.CharField(max_length=1, choices=POSITION_CHOICES)
     categoria = models.ManyToManyField(categoria, null=True, blank=True)
     comentar = models.BooleanField(default=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     @models.permalink
     def get_absolute_url(self):
