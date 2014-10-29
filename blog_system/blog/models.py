@@ -54,5 +54,11 @@ class comentarios(models.Model):
 
     def __unicode__(self):
         return "%s --> Lo hizo %s --> Hora:  %s" % ( self.Blog, self.nombre, self.fecha_pub)
+class rating(models.Model):
+    Blog = models.ForeignKey(Blog)
+    calificacion = models.IntegerField()
+
+    def __unicode__(self):
+        return "%s----%s"%(self.Blog, self.calificacion)
 
 

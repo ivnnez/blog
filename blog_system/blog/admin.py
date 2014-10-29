@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db.models import TextField
-from blog.models import Blog, categoria, comentarios
+from blog.models import Blog, categoria, comentarios, rating
 from file_picker.wymeditor.widgets import WYMeditorWidget
 
 class BlogAdmin(admin.ModelAdmin):
@@ -13,3 +13,4 @@ class BlogAdmin(admin.ModelAdmin):
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(categoria)
 admin.site.register(comentarios)
+admin.site.register(rating)

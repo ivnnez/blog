@@ -7,6 +7,14 @@
 <center>
 	<h1 itemscope itemprop="titlulo">{{ blog }}</h1>
 	<img itemprop="imagen" src='{{  blog.imagen.url }}'/>
+    <br>
+    <div style="border: 1px">
+        <h6>Rating:</h6>
+        {%for i in Star  %}
+            <img id="logo-header" src="/media/img/star.png">
+        {%endfor%}
+    </div>
+
 	<h1><small itemprop="datePublished">{{ blog.time }}</small></h1>
 </center>
 <h3>

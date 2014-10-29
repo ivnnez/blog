@@ -1,7 +1,7 @@
 # Create your views here.
 from django.template.response import  TemplateResponse
 from django.shortcuts import get_object_or_404 
-from blog.models import Blog, categoria, comentarios  #poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
+from blog.models import Blog, categoria, comentarios, rating #poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
 
 from django.shortcuts import render_to_response
 from forms import ComentarioForm, ContactForm
@@ -10,6 +10,8 @@ from django.template import RequestContext
 from django.core.mail import EmailMultiAlternatives
 
 from django.conf import settings
+
+from django.db.models import Sum
 
 def base(request):
 	Descripcion = settings.SITE_DESCRIPTION
@@ -34,6 +36,11 @@ def blog(request, id_blog):
 	blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
 	blog = get_object_or_404(Blog, id = id_blog)
 	cate = categoria.objects.all()
+	sumCalifBlogs = rating.objects.aggregate(Sum('calificacion')).values()[0]
+	sumCalifblog= rating.objects.filter(Blog=blog.id).aggregate(Sum('calificacion')).values()[0]
+	numStarsblog= (sumCalifblog*10)/sumCalifBlogs
+	Star= [i+1 for i in range(numStarsblog)]
+
 	if blog.comentar:
 		comenta = comentarios.objects.filter(Blog=blog.id).order_by('fecha_pub').reverse()[:5]
 		if request.method=="POST":
@@ -48,19 +55,19 @@ def blog(request, id_blog):
 				ct.cuerpo=cuerpo
 				ct.save()
 				# info = 'se guardo satisfactoriamente'
-				return TemplateResponse(request, "blog.html",{'ct':ct,'id_blog':id_blog, 'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta})
+				return TemplateResponse(request, "blog.html",{'ct':ct,'id_blog':id_blog, 'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta, 'Star':Star})
 			# else:
 				# info = ' informacion con datos incorrectos'
 			form = ComentarioForm()
-			ctx = {'form':form,'id_blog':id_blog, 'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta}
+			ctx = {'form':form,'id_blog':id_blog, 'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta, 'Star':Star}
 			return render_to_response('blog.html',ctx,context_instance=RequestContext(request))			
 		else:
 			form = ComentarioForm()
-			ctx = {'form':form, 'id_blog':id_blog, 'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta}
+			ctx = {'form':form, 'id_blog':id_blog, 'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta, 'Star':Star}
 		return render_to_response('blog.html',ctx,context_instance=RequestContext(request))	
 	else:
 		comenta= ''
-	return TemplateResponse(request, "blog.html", {'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta})
+	return TemplateResponse(request, "blog.html", {'blog':blog,'cate':cate,'blogsRecientes':blogsRecientes, 'comentarios':comenta, 'Star':Star})
 
 def categorias(request,id_categoria):
 	blogsP1 = Blog.objects.filter(status='P',position='1',categoria=id_categoria).order_by('time').reverse()[:2]
