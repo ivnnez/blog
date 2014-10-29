@@ -34,7 +34,7 @@ class Blog(models.Model):
     imagen = models.ImageField(upload_to='photos')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     position = models.CharField(max_length=1, choices=POSITION_CHOICES)
-    categoria = TaggableManager(through=TaggedCategory)
+    categoria = TaggableManager(through=TaggedCategory, verbose_name="Categoria")
     categoria.rel.related_name = '+'
     comentar = models.BooleanField(default=True)
     tags = TaggableManager(through=TaggedTag)
@@ -63,6 +63,4 @@ class rating(models.Model):
     calificacion = models.IntegerField()
 
     def __unicode__(self):
-        return "%s----%s"%(self.Blog, self.calificacion)
-
-
+        return "%s----%s" % (self.Blog, self.calificacion)
