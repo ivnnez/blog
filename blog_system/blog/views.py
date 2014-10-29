@@ -1,14 +1,7 @@
 # Create your views here.
-<<<<<<< HEAD
 from django.template.response import  TemplateResponse
 from django.shortcuts import get_object_or_404 
 from blog.models import Blog, categoria, comentarios, rating #poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
-=======
-from django.template.response import TemplateResponse
-from django.shortcuts import get_object_or_404
-from blog.models import Blog, categoria, \
-    comentarios  # poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
->>>>>>> 4ea6fe9b9cef71954a51b23d3e519bf1558579fd
 
 from django.shortcuts import render_to_response
 from forms import ComentarioForm, ContactForm
@@ -18,10 +11,9 @@ from django.core.mail import EmailMultiAlternatives
 
 from django.conf import settings
 
-<<<<<<< HEAD
+
 from django.db.models import Sum
-=======
->>>>>>> 4ea6fe9b9cef71954a51b23d3e519bf1558579fd
+
 
 def base(request):
     Descripcion = settings.SITE_DESCRIPTION
