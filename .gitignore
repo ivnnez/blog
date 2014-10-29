@@ -1,0 +1,15 @@
+blog_system/.idea
+blog_system/.idea/
+blog_system/colstatic/
+blog_system/media/
+
+#python
+*.iml
+*.pyc
+*.ipr
+*.iws
+#basic
+*.lock
+*.DS_Store
+*.swp
+*.out
