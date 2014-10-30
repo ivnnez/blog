@@ -42,10 +42,10 @@ def blog(request, id_blog):
     blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
     blog = get_object_or_404(Blog, id=id_blog)
     cate = Blog.categoria.all()
-    sumCalifBlogs = rating.objects.aggregate(Sum('calificacion')).values()[0]
-    sumCalifblog = rating.objects.filter(Blog=blog.id).aggregate(Sum('calificacion')).values()[0]
-    numStarsblog = (sumCalifblog * 10) / sumCalifBlogs
-    Star = [i + 1 for i in range(numStarsblog)]
+    #sumCalifBlogs = rating.objects.aggregate(Sum('calificacion')).values()[0]
+    #sumCalifblog = rating.objects.filter(Blog=blog.id).aggregate(Sum('calificacion')).values()[0]
+    #numStarsblog = (sumCalifblog * 10) / sumCalifBlogs
+    #Star = [i + 1 for i in range(numStarsblog)]
 
     if blog.comentar:
         comenta = comentarios.objects.filter(Blog=blog.id).order_by('fecha_pub').reverse()[:5]
@@ -62,24 +62,22 @@ def blog(request, id_blog):
                 ct.save()
                 # info = 'se guardo satisfactoriamente'
                 return TemplateResponse(request, "blog.html", {'ct': ct, 'id_blog': id_blog, 'blog': blog, 'cate': cate,
-                                                               'blogsRecientes': blogsRecientes, 'comentarios': comenta,
-                                                               'Star': Star})
+                                                               'blogsRecientes': blogsRecientes, 'comentarios': comenta})
             # else:
             # info = ' informacion con datos incorrectos'
             form = ComentarioForm()
             ctx = {'form': form, 'id_blog': id_blog, 'blog': blog, 'cate': cate, 'blogsRecientes': blogsRecientes,
-                   'comentarios': comenta, 'Star': Star}
+                   'comentarios': comenta}
             return render_to_response('blog.html', ctx, context_instance=RequestContext(request))
         else:
             form = ComentarioForm()
             ctx = {'form': form, 'id_blog': id_blog, 'blog': blog, 'cate': cate, 'blogsRecientes': blogsRecientes,
-                   'comentarios': comenta, 'Star': Star}
+                   'comentarios': comenta}
         return render_to_response('blog.html', ctx, context_instance=RequestContext(request))
     else:
         comenta = ''
     return TemplateResponse(request, "blog.html",
-                            {'blog': blog, 'cate': cate, 'blogsRecientes': blogsRecientes, 'comentarios': comenta,
-                             'Star': Star})
+                            {'blog': blog, 'cate': cate, 'blogsRecientes': blogsRecientes, 'comentarios': comenta})
 
 
 def categorias(request, id_categoria):

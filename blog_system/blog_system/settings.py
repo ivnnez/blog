@@ -27,6 +27,18 @@ USE_TZ = True
 
 SECRET_KEY = 'mx-1t#-8()r*wnba1wo)s)%xim6a66d8y7w!no%g+k(o&amp;4)4*s'
 
+#procesador de contexto
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    #"blog.blog_context_processor",
+)
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',

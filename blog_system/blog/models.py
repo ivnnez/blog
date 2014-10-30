@@ -1,8 +1,7 @@
 from django.db import models
 from taggit_autosuggest.managers import TaggableManager
 #from taggit.managers import TaggableManager
-from taggit.models import TaggedItemBase
-
+from taggit.models import TaggedItemBase, TagBase, GenericTaggedItemBase
 
 POSITION_CHOICES = (
     (u'1', (u'Up')),
@@ -17,8 +16,15 @@ STATUS_CHOICES = (
 )
 
 
-class TaggedCategory(TaggedItemBase):
-    content_object = models.ForeignKey('Blog')
+class Categorias(TagBase):
+    class Meta:
+        verbose_name = "categoria"
+        verbose_name_plural = "categorias"
+
+
+class TaggedCategory(GenericTaggedItemBase):
+    tag = models.ForeignKey(Categorias,
+                            related_name="%(app_label)s_%(class)s_items")
 
 
 class TaggedTag(TaggedItemBase):
@@ -38,6 +44,7 @@ class Blog(models.Model):
     categoria.rel.related_name = '+'
     comentar = models.BooleanField(default=True)
     tags = TaggableManager(through=TaggedTag)
+    tags.rel.related_neme = "-"
 
     @models.permalink
     def get_absolute_url(self):
