@@ -67,7 +67,7 @@ class comentarios(models.Model):
         return "%s --> Lo hizo %s --> Hora:  %s" % ( self.Blog, self.nombre, self.fecha_pub)
 class rating(models.Model):
     Blog = models.ForeignKey(Blog)
-    calificacion = models.IntegerField()
+    calificacion = models.IntegerField(default=0)
 
     def __unicode__(self):
         return "%s----%s" % (self.Blog, self.calificacion)
