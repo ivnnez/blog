@@ -9,11 +9,23 @@
 	<h1 itemscope itemprop="titlulo">{{ blog }}</h1>
 	<img itemprop="imagen" src='{{  blog.imagen.url }}'/>
     <br>
-    <div style="border: 1px">
+    <div style=" height:150px; width:300px">
         <h6>Rating:</h6>
         {%for i in Star  %}
-            <img id="logo-header" src="/media/img/star.png">
+            <img id="logo-header" align="left" src="/media/img/star.jpg" height="20" width="20">
         {%endfor%}
+        <br>
+    <form action="." method="POST">
+        {% csrf_token %}
+        <br>
+        Calificacion: 
+        1<input type="radio" name="calificacion" value="1">
+        2<input type="radio" name="calificacion" value="2">
+        3<input type="radio" name="calificacion" value="3">
+        4<input type="radio" name="calificacion" value="4">
+        5<input type="radio" name="calificacion" value="5">
+    <button class="" type="submit">Calificar</a>
+    </form>
     </div>
 
 	<h1><small itemprop="datePublished">{{ blog.time }}</small></h1>
