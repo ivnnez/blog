@@ -36,7 +36,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    #"blog.blog_context_processor",
+    "blog.context_processors.blog_context_processor",
 )
 
 # List of callables that know how to import templates from various sources.

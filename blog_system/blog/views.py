@@ -22,9 +22,7 @@ def base(request):
     Url = settings.SITE_URL
     Image = settings.SITE_IMAGE
     print Image
-    return TemplateResponse(request, "base.html",
-                            {'Descripcion': Descripcion, 'Locale': Locale, 'Type': Type, 'Title': Title, 'Url': Url,
-                             'Image': Image})
+    return TemplateResponse(request, "base.html")
 
 
 def home(request):

@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {%block title%} {{blog}} {%endblock%}
-{%block tags%}{% for ta in tag %}
-<meta property= "{{blog.title}}" content="{{ta.nombretag}}" />{% endfor %}
+{%block tags%}
+    <meta property="og:image" content="{{ blog.imagen }}" />
+    <meta property="og:description" content="{% for tag in blog.tags.all %}{{ tag.name }}, {% endfor %}" />
 {%endblock%}
 {%block RecentWorks%}
 <center>

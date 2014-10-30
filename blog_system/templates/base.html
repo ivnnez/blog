@@ -116,8 +116,8 @@
                                 Categorias
                             </a>
                             <ul class="dropdown-menu">
-                            {% for cat in cate %}
-                            <li><a class="" href="/categorias/{{cat.id}}">{{ cat.nombre }}</a></li>
+                            {% for categoria in categorias %}
+                            <li><a class="" href="/categorias/{{categoria.id}}">{{ categoria.name }}</a></li>
                             {% endfor %}
                             </ul>
                         </li>
