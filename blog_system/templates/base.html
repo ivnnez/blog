@@ -237,9 +237,9 @@
                     <!-- Social Links -->
                     <div class="headline"><h2>Comparte</h2></div>
                     <ul class="social-icons">
-                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
-                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
-                        <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                        <li><a href="http://www.facebook.com/sharer.php?u={{ Url }}" data-original-title="Facebook" class="social_facebook"></a></li>
+                        <li><a href="http://twitter.com/share?text={{ Title }}&url={{ Url }}" data-original-title="Twitter" class="social_twitter"></a></li>
+                        <li><a href="https://plus.google.com/share?url={{ Url }}" data-original-title="Goole Plus" class="social_googleplus" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a></li>
                     </ul>
                     <!-- End Social Links -->
                 </div><!--/col-md-4-->
@@ -282,8 +282,9 @@
 <script type="text/javascript" src="/media/js/app.js"></script>
 <script type="text/javascript" src="/media/js/index.js"></script>
 
-
-
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'es'}
+</script>
 
 </body>
 </hmtl>
