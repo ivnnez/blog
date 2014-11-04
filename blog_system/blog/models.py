@@ -1,6 +1,5 @@
 from django.db import models
 from taggit_autosuggest.managers import TaggableManager
-#from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase, TagBase, GenericTaggedItemBase
 
 POSITION_CHOICES = (

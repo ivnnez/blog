@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'taggit',
     'taggit_autosuggest',
+    'ckeditor',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -158,3 +159,14 @@ SITE_TITLE = 'Blog Dubalu'
 SITE_URL = 'http://www.dubalu.com/'
 SITE_IMAGE ='http://www.dubalu.com/'
 
+
+CKEDITOR_UPLOAD_PATH = MEDIA_URL + 'ckeditor/'
+CKEDITOR_CONFIGS = {
+    'basic_ckeditor': {
+        'toolbar': 'Basic',
+    },
+    'full_ckeditor': {
+        'toolbar': 'Full',
+        #'uiColor': '#666565'
+    },
+}
