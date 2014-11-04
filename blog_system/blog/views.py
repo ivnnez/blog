@@ -11,7 +11,7 @@ from django.core.mail import EmailMultiAlternatives
 
 from django.conf import settings
 
-from django.db.models import Sum
+from django.db.models import Sum, Count
 
 
 def base(request):
@@ -40,10 +40,14 @@ def blog(request, id_blog):
     blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
     blog = get_object_or_404(Blog, id=id_blog)
     cate = Blog.categoria.all()
-    sumCalifBlogs = rating.objects.aggregate(Sum('calificacion')).values()[0]
+    numCalifblog = rating.objects.filter(Blog=id_blog).aggregate(Count('Blog')).values()[0]
+    print numCalifblog
+
     sumCalifblog = rating.objects.filter(Blog=blog.id).aggregate(Sum('calificacion')).values()[0]
+
+    print sumCalifblog
     if sumCalifblog > 0:
-        numStarsblog = (sumCalifblog * 10) / sumCalifBlogs
+        numStarsblog = (sumCalifblog)/numCalifblog
         Star = [i + 1 for i in range(numStarsblog)]
     else:
         Star = [i + 1 for i in range(0)]
