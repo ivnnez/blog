@@ -1,17 +1,18 @@
+from django import forms
 from django.contrib import admin
-from django.db.models import TextField
+from ckeditor.widgets import CKEditorWidget
 from .models import Blog, comentarios, rating, Categorias
-from file_picker.wymeditor.widgets import WYMeditorWidget
+
+class BlogAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorWidget(config_name='full_ckeditor'))
+    perex = forms.CharField(widget=CKEditorWidget(config_name='basic_ckeditor'))
+
+    class Meta:
+        model = Blog
 
 
 class BlogAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('title', )}
-    list_display = ('title', 'time')
-    formfield_overrides = {TextField: {'widget': WYMeditorWidget({})}}
-
-    class Media:
-        js = ('http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js',)
-
+    form = BlogAdminForm
 
 admin.site.register(Categorias)
 admin.site.register(Blog, BlogAdmin)

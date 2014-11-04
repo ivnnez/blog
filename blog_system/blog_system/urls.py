@@ -21,4 +21,5 @@ urlpatterns = patterns('',
                            {'document_root': settings.MEDIA_ROOT}),
                        url(r'^feeds/$', EntradasFeed()),
                        url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
+                       url(r'^ckeditor/', include('ckeditor.urls')),
 )
