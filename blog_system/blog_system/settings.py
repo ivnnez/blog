@@ -170,3 +170,5 @@ CKEDITOR_CONFIGS = {
         #'uiColor': '#666565'
     },
 }
+
+TEMA = 'principal'

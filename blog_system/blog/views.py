@@ -13,6 +13,8 @@ from django.conf import settings
 
 from django.db.models import Sum, Count
 
+from django.db.models import Q
+
 
 def base(request):
     Descripcion = settings.SITE_DESCRIPTION
@@ -136,3 +138,19 @@ def contacto_view(request):
     ctx = {'form': formulario, 'email': email, 'titulo': titulo, 'texto': texto, 'info_enviado': info_enviado,
            'blogsRecientes': blogsRecientes, 'cate': cate}
     return render_to_response('contacto.html', ctx, context_instance=RequestContext(request))
+
+
+def busqueda(request):
+    cate = Blog.categoria.all()
+    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    query = request.GET.get('q', '')
+    if query:
+        qset = (
+            Q(title__icontains=query)|
+            Q(perex__icontains=query)|
+            Q(content__icontains=query)
+        )
+        results = Blog.objects.filter(qset).distinct()
+    else:
+        results = []
+    return render_to_response("busqueda.html", {"results": results, "query": query, 'cate':cate, 'blogsRecientes':blogsRecientes})

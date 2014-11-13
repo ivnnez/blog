@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends base %}
 {%block title%} {{blog}} {%endblock%}
 {%block tags%}
     <meta property="og:image" content="{{ blog.imagen }}" />
@@ -7,10 +7,10 @@
 {%block RecentWorks%}
 <center>
 	<h1 itemscope itemprop="titlulo">{{ blog }}</h1>
-	<img itemprop="imagen" src='{{  blog.imagen.url }}' height="600" width="600"/>
+	<img itemprop="imagen" src='{{  blog.imagen.url }}' height="400" width="400" max-width="400" max-height="400"/>
     <br>
     <div style=" height:150px; width:300px">
-        <h6>Rating:</h6>
+        <h5 align = left>RATING:</h5>
         {%for i in Star  %}
             <img id="logo-header" align="left" src="/media/img/esdorada.jpg" height="30" width="30">
         {%endfor%}
@@ -18,13 +18,14 @@
     <form action="." method="POST">
         {% csrf_token %}
         <br>
-        <div>
-        Calificacion:   
-        <input type="image" src="/media/img/esdorada.jpg" name ="calificacion" value = "1" onmouseover="this.src='/media/img/esblanca.jpg';" onmouseout="this.src='/media/img/esdorada.jpg';" height="20" width="20">
-        <input type="image" src="/media/img/esdorada.jpg" name ="calificacion" value = "2" onmouseover="this.src='/media/img/esblanca.jpg';" onmouseout="this.src='/media/img/esdorada.jpg';" height="20" width="20">
-        <input type="image" src="/media/img/esdorada.jpg" name ="calificacion" value = "3" onmouseover="this.src='/media/img/esblanca.jpg';" onmouseout="this.src='/media/img/esdorada.jpg';" height="20" width="20">
-        <input type="image" src="/media/img/esdorada.jpg" name ="calificacion" value = "4" onmouseover="this.src='/media/img/esblanca.jpg';" onmouseout="this.src='/media/img/esdorada.jpg';" height="20" width="20">
-        <input type="image" src="/media/img/esdorada.jpg" name ="calificacion" value = "5" onmouseover="this.src='/media/img/esblanca.jpg';" onmouseout="this.src='/media/img/esdorada.jpg';" height="20" width="20">
+        <div >
+        <h6 align = left> Calificar :</h6>   
+        <input type="image" src="/media/img/esblanca.jpg" name ="calificacion" value = "1" onmouseover="this.src='/media/img/esdorada.jpg';" onmouseout="this.src='/media/img/esblanca.jpg';" height="20" width="20" align = left>
+        <input type="image" src="/media/img/esblanca.jpg" name ="calificacion" value = "2" onmouseover="this.src='/media/img/esdorada.jpg';" onmouseout="this.src='/media/img/esblanca.jpg';" height="20" width="20" align = left>
+        <input type="image" src="/media/img/esblanca.jpg" name ="calificacion" value = "3" onmouseover="this.src='/media/img/esdorada.jpg';" onmouseout="this.src='/media/img/esblanca.jpg';" height="20" width="20" align = left>
+        <input type="image" src="/media/img/esblanca.jpg" name ="calificacion" value = "4" onmouseover="this.src='/media/img/esdorada.jpg';" onmouseout="this.src='/media/img/esblanca.jpg';" height="20" width="20" align = left>
+        <input type="image" src="/media/img/esblanca.jpg" name ="calificacion" value = "5" onmouseover="this.src='/media/img/esdorada.jpg';" onmouseout="this.src='/media/img/esblanca.jpg';" height="20" width="20" align = left>
+        
         </div>
     </form>
     </div>

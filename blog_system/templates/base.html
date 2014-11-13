@@ -125,7 +125,10 @@
 
                         <!-- Search Block -->
                         <li>
-                            <i class="search fa fa-search search-btn"></i>
+                                <a href="/busqueda">
+                            <i class="search fa fa-search search-btn">
+                            </i>
+                                </a>
                             <div class="search-open">
                                 <div class="input-group animated fadeInDown">
                                     <input type="text" class="form-control" placeholder="Buscar">
@@ -147,6 +150,9 @@
     <div class="container content">
         <!-- Info Blokcs -->
         <div class="row margin-bottom-30">
+            {% block busqueda %}
+                
+            {% endblock busqueda %}
             {% block NoticiaPrincipal %}
                 
             {% endblock NoticiaPrincipal %}
@@ -282,7 +288,7 @@
 <script type="text/javascript" src="/media/js/app.js"></script>
 <script type="text/javascript" src="/media/js/index.js"></script>
 
-<script src="https://apis.google.com/js/platform.js" async defer>
+<script src="media/js/platform.js" async defer>
   {lang: 'es'}
 </script>
 

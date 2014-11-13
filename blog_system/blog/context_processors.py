@@ -7,6 +7,15 @@ from blog_system.settings import (
     SITE_IMAGE,
 )
 from blog.models import Categorias
+from blog_system.settings import TEMA
+
+def tema():
+    if TEMA == 'principal':
+        return 'base.html'
+    else:
+        return 'base2.html'
+
+
 
 
 def blog_context_processor(request):
@@ -18,5 +27,6 @@ def blog_context_processor(request):
         "Url": SITE_URL,
         "Image": SITE_IMAGE,
         "categorias": Categorias.objects.all(),
+        "base": tema()
     }
     return context
