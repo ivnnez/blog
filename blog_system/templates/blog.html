@@ -5,7 +5,6 @@
     <meta property="og:description" content="{% for tag in blog.tags.all %}{{ tag.name }}, {% endfor %}" />
 {%endblock%}
 {%block RecentWorks%}
-<center>
 	<h1 itemscope itemprop="titlulo">{{ blog }}</h1>
 	<img itemprop="imagen" src='{{  blog.imagen.url }}' height="400" width="400" max-width="400" max-height="400"/>
     <br>
@@ -29,9 +28,7 @@
         </div>
     </form>
     </div>
-
 	<h1><small itemprop="datePublished">{{ blog.time }}</small></h1>
-</center>
 <h3>
 	{{ blog.perex|safe }}
 </h3>
