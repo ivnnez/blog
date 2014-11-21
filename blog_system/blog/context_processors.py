@@ -9,13 +9,12 @@ from blog_system.settings import (
 from blog.models import Categorias
 from blog_system.settings import TEMA
 
+
 def tema():
     if TEMA == 'principal':
         return 'base.html'
     else:
         return 'base2.html'
-
-
 
 
 def blog_context_processor(request):

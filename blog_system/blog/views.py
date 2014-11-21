@@ -2,17 +2,12 @@
 from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
 from .models import Blog, comentarios, rating  # poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
-
 from django.shortcuts import render_to_response
 from forms import ComentarioForm, ContactForm, ratingForm
 from django.template import RequestContext
-
 from django.core.mail import EmailMultiAlternatives
-
 from django.conf import settings
-
 from django.db.models import Sum, Count
-
 from django.db.models import Q
 
 

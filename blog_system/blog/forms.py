@@ -13,6 +13,7 @@ class ContactForm(forms.Form):
     Titulo = forms.CharField(widget=forms.TextInput())
     Texto = forms.CharField(widget=forms.Textarea())
 
+
 class ratingForm(forms.ModelForm):
     class Meta:
         model = rating
