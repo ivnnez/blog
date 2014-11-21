@@ -14,8 +14,10 @@ class BlogAdminForm(forms.ModelForm):
 
 class BlogAdmin(admin.ModelAdmin):
     form = BlogAdminForm
+    list_display = ('slug', 'status', 'position', 'comentar')
+    list_filter = ['time']
 
 admin.site.register(Categorias)
-admin.site.register(Blog, BlogAdmin)
+admin.site.register(Blog, BlogAdmin, )
 admin.site.register(comentarios)
 admin.site.register(rating)

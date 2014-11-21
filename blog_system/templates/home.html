@@ -13,7 +13,7 @@
                 </div>
                 <div>
                     <p align="justify">
-                    <h6>{{ blog.content|safe|striptags|truncatewords:30 }}</h6>
+                    <h6>{{ blog.content|safe|striptags|truncatewords_html:15 }}</h6>
                     </p>
                 </div>
             </div>
@@ -55,7 +55,7 @@
     <div class="row margin-bottom-20">
         {% for blog in blogsP3 %}
             <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
+                <div class="thumbnails thumbnail-style">
                     <div class="thumbnail-img">
                         <div class="overflow-hidden">
                             <img class="img-responsive" src="{{ blog.imagen.url }}" alt="">
@@ -64,7 +64,6 @@
                     </div>
                     <div class="caption">
                         <h3><a class="hover-effect" href="#">{{ blog.time }}</a></h3>
-
                         <p>{{ blog }}</p>
                     </div>
                 </div>

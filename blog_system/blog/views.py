@@ -27,7 +27,7 @@ def home(request):
     # filtramos los blogs para no enviar todo a la pagina ordenamos 'time' para enviar los mas recientes
     blogsP1 = Blog.objects.filter(status='P', position='1').order_by('time').reverse()[:1]
     blogsP2 = Blog.objects.filter(status='P', position='2').order_by('time').reverse()[:4]
-    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('time').reverse()[:4]
+    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('time')
     blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
     return TemplateResponse(request, "home.html", {'blogsP1': blogsP1, 'blogsP2': blogsP2, 'blogsP3': blogsP3,
                                                    'blogsRecientes': blogsRecientes, 'cate': cate})
