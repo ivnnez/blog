@@ -34,7 +34,7 @@ class Blog(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
     slug = models.SlugField()
-    perex = models.TextField()
+    perex = models.TextField(unique=True)
     content = models.TextField()
     imagen = models.ImageField(upload_to='photos')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
@@ -47,7 +47,7 @@ class Blog(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('blog', [self.slug])
+        return ('blog', (self.slug))
 
     def __unicode__(self):
         return self.title
