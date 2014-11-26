@@ -13,6 +13,7 @@ class BlogAdminForm(forms.ModelForm):
 
 
 class BlogAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('title',)}
     form = BlogAdminForm
     list_display = ('slug', 'status', 'position', 'comentar')
     list_filter = ['time']
