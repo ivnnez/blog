@@ -1,0 +1,5 @@
+LISTA DE COSAS QUE FALTAN POR HACER PARA EL BLOG
+
+- Un html para logeo 
+- Que solo un post este como up, cuando uno nuevo se ponga up que el que estaba cambie su estado a down
+- Que al agregar un post en el admin los compos de tags y categotias se vean correctamente. 
