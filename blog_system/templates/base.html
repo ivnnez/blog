@@ -103,8 +103,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <!-- Home -->
-                    <li class="dropdown active">
+                        {% if user.is_superuser %}
+                        <!-- admin -->
+                        <li>
+                            <a href="/admin">
+                                Admin
+                            </a>
+                        </li>
+                        {% endif %}
+                        <!-- Home -->
+                        <li class="active">
                         <a href="/">
                             Inicio
                         </a>

@@ -58,7 +58,7 @@
 
 {% endblock %}
 {% block Comentarios %}
-    {% if comentarios != '' %}
+    {% if comentarios != '' and user.is_authenticated %}
         <hr/>
         <center><h2>Comentarios</h2></center>
         <hr/>
