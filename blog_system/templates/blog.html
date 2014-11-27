@@ -1,4 +1,5 @@
 {% extends base %}
+{% load bootstrap %}
 {% block title %} {{ blog }} {% endblock %}
 {% block tags %}
     <meta property="og:image" content="{{ blog.imagen }}"/>
@@ -47,9 +48,11 @@
         {{ blog.perex|safe }}
     </h3>
     <p align="justify">
-    <h6>
+    <h5>
         {{ blog.content|safe }}
-    </h6>
+    </h5>
+    
+    </di>
     </p>
     <br><br>
     <a class="btn-u" href="/">
@@ -73,12 +76,14 @@
             </p>
             <hr/>
         {% endfor %}
-        <form action="." method="POST">{% csrf_token %}
-            <ul>
-                {{ form.as_ul }}
-            </ul>
-            <input class="btn-u" type="submit" name="submit" value="Comentar"></form>
-        <br>
+        <div class="row">
+            <div class="col-md-5">
+                <form action="." method="POST">{% csrf_token %}
+                    {{ form|bootstrap}}
+                    <input class="btn-u" type="submit" name="submit" value="Comentar">
+                </form>
+            </div>
+        </div>
     {% endif %}
 {% endblock Comentarios %}
 

@@ -70,7 +70,7 @@ def blog(request, id_blog):
                 ct.cuerpo = cuerpo
                 ct.save()
                 # info = 'se guardo satisfactoriamente'
-                return TemplateResponse(request, "blog.html", {'ct': ct, 'id_blog': id_blog, 'blog': blog, 'cate': cate,
+                return TemplateResponse(request, "blog.html", {'form':ComentarioForm(),'ct': ct, 'id_blog': id_blog, 'blog': blog, 'cate': cate,
                                                                'blogsRecientes': blogsRecientes, 'comentarios': comenta, 'Star': Star})
             # else:
             # info = ' informacion con datos incorrectos'

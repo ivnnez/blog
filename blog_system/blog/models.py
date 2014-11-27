@@ -57,13 +57,15 @@ class Blog(models.Model):
 
 
 class comentarios(models.Model):
-    nombre = models.CharField(max_length=200)
-    cuerpo = models.TextField(verbose_name="Comentario")
-    fecha_pub = models.DateTimeField(auto_now_add=True)
     Blog = models.ForeignKey(Blog)
+    nombre = models.CharField(max_length=200, blank=True, null=True)
+    cuerpo = models.TextField(verbose_name="Comentario", max_length=80)
+    fecha_pub = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __unicode__(self):
         return "%s --> Lo hizo %s --> Hora:  %s" % ( self.Blog, self.nombre, self.fecha_pub)
+
+
 class rating(models.Model):
     Blog = models.ForeignKey(Blog)
     calificacion = models.IntegerField(default=0)
