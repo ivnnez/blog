@@ -24,7 +24,7 @@
 {% block imagenesdeslizante %}
     <div class="col-md-4">
         <div class="headline"><h2>Fotos</h2></div>
-        <div id="myCarousel" class="carousel slide carousel-v1">
+        <div id="myCarousel" class="carousel slide carousel-v1" style="max-height:300px; min-height: 300px">
             <div class="carousel-inner">
 
                 {% for blog in blogsP2 %}
@@ -40,10 +40,10 @@
 
             <div class="carousel-arrow">
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
+                    <i class="fa fa-angle-left" style="position:relative; bottom:0px; left:0"></i>
                 </a>
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
+                    <i class="fa fa-angle-right" style="position:relative; bottom:0px; right:0"></i>
                 </a>
             </div>
         </div>
@@ -55,7 +55,7 @@
     <div class="row margin-bottom-20">
         {% for blog in blogsP3 %}
             <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style">
+                <div class="thumbnails thumbnail-style" style="height:360px; overflox:hidden;">
                     <div class="thumbnail-img">
                         <div class="overflow-hidden">
                             <img class="img-responsive" src="{{ blog.imagen.url }}" alt="">
@@ -63,8 +63,8 @@
                         <a class="btn-more hover-effect" href="/blog/{{ blog.id }}">leer mas +</a>
                     </div>
                     <div class="caption">
-                        <h3><a class="hover-effect" href="#">{{ blog.time }}</a></h3>
-                        <p>{{ blog }}</p>
+                        <h3><a class="hover-effect" href="#">{{ blog }}</a></h3>
+                        <p>{{ blog.time }}</p>
                     </div>
                 </div>
             </div>
