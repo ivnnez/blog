@@ -7,7 +7,9 @@
 {% endblock %}
 {% block RecentWorks %}
     <h1 itemscope itemprop="titlulo">{{ blog }}</h1>
-    <img itemprop="imagen" src='{{ blog.imagen.url }}' height="300" width="500" max-width="400" max-height="400"/>
+    <div style="max-width:500px; max-height:400px; overflow:hidden;">
+        <img itemprop="imagen" src='{{ blog.imagen.url }}'/>
+    </div>
     <br>
     <div style=" height:150px; width:300px">
         <h5 align=left>RATING:</h5>

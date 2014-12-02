@@ -41,7 +41,7 @@ class Blog(models.Model):
     position = models.CharField(max_length=1, choices=POSITION_CHOICES)
     categoria = TaggableManager(through=TaggedCategory, verbose_name="Categoria")
     categoria.rel.related_name = '+'
-    comentar = models.BooleanField(default=True)
+    comentar = models.BooleanField(default=False)
     tags = TaggableManager(through=TaggedTag)
     tags.rel.related_neme = "-"
 
