@@ -18,7 +18,17 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ('slug', 'status', 'position', 'comentar')
     list_filter = ['time']
 
+
+class ComentariosAdmin(admin.ModelAdmin):
+    list_display = ('Blog', 'nombre', 'cuerpo')
+    list_filter = ['fecha_pub']
+
+
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ('Blog', 'calificacion')
+
+
 admin.site.register(Categorias)
 admin.site.register(Blog, BlogAdmin, )
-admin.site.register(comentarios)
-admin.site.register(rating)
+admin.site.register(comentarios, ComentariosAdmin)
+admin.site.register(rating, RatingAdmin)
