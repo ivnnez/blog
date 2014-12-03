@@ -18,31 +18,36 @@ def base(request):
     Title = settings.SITE_TITLE
     Url = settings.SITE_URL
     Image = settings.SITE_IMAGE
-    print Image
     return TemplateResponse(request, "base.html")
 
 
 def home(request):
     cate = Blog.categoria.all()
     # filtramos los blogs para no enviar todo a la pagina ordenamos 'time' para enviar los mas recientes
-    blogsP1 = Blog.objects.filter(status='P', position='1').order_by('time').reverse()[:1]
-    blogsP2 = Blog.objects.filter(status='P', position='2').order_by('time').reverse()[:4]
-    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('time')
-    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    
+    try:
+        a= Blog.objects.filter(position=1,status='P')[1].pk
+        b=Blog.objects.get(id=a)
+        b.position='3'
+        b.save()
+    except:
+        pass
+    blogsP1 = Blog.objects.filter(status='P', position='1').order_by('-time')[:1]
+    blogsP2 = Blog.objects.filter(status='P', position='2').order_by('-time')[:4]
+    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('-time')
+    blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     return TemplateResponse(request, "home.html", {'blogsP1': blogsP1, 'blogsP2': blogsP2, 'blogsP3': blogsP3,
                                                    'blogsRecientes': blogsRecientes, 'cate': cate})
 
 
 def blog(request, id_blog):
-    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     blog = get_object_or_404(Blog, id=id_blog)
     cate = Blog.categoria.all()
     numCalifblog = rating.objects.filter(Blog=id_blog).aggregate(Count('Blog')).values()[0]
-    print numCalifblog
 
     sumCalifblog = rating.objects.filter(Blog=blog.id).aggregate(Sum('calificacion')).values()[0]
 
-    print sumCalifblog
     if sumCalifblog > 0:
         numStarsblog = (sumCalifblog)/numCalifblog
         Star = [i + 1 for i in range(numStarsblog)]
@@ -90,14 +95,11 @@ def blog(request, id_blog):
 
 
 def categorias(request, id_categoria):
-    blogsP1 = Blog.objects.filter(status='P', position='1', categoria=id_categoria).order_by('time').reverse()[:2]
-    blogsP2 = Blog.objects.filter(status='P', position='2', categoria=id_categoria).order_by('time').reverse()[:4]
-    blogsP3 = Blog.objects.filter(status='P', position='3', categoria=id_categoria).order_by('time').reverse()[:3]
-    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    blogsCategoria = Blog.objects.filter(status='P', categoria=id_categoria).order_by('-time')
+    blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     cate = Blog.categoria.all()
-    return TemplateResponse(request, "home.html",
-                            {'cate': cate, 'blogsP1': blogsP1, 'blogsP2': blogsP2, 'blogsP3': blogsP3,
-                             'blogsRecientes': blogsRecientes})
+    return TemplateResponse(request, "categorias.html",
+                            {'cate': cate, 'blogsCategoria': blogsCategoria,'blogsRecientes': blogsRecientes})
 
 
 def demo(request):
@@ -106,7 +108,7 @@ def demo(request):
 
 
 def contacto_view(request):
-    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     cate = Blog.categoria.all()
     info_enviado = False  # definir si se envio la informacion
     email = ""
@@ -137,7 +139,7 @@ def contacto_view(request):
 
 def busqueda(request):
     cate = Blog.categoria.all()
-    blogsRecientes = Blog.objects.filter(status='P').order_by('time').reverse()[:4]
+    blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     query = request.GET.get('q', '')
     if query:
         qset = (

@@ -7,10 +7,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+                       # url(r'^$', 'django.contrib.auth.views.login',{'template_name':'login.html',name='login'}),
+                       # url(r'^cerrar/$', 'django.contrib.auth.views.logout',{'template_name':'login.html',name='login'}),
+                       # url de inicio antes de implementar el loggin
+                       url(r'^$', 'blog.views.home', name='home'),
                        url(r'^categorias/(?P<id_categoria>\d+)/$', 'blog.views.categorias', name='categorias'),
                        # url(r'^categorias/$', 'blog.views.categorias', name='categorias'),
                        url(r'^base/$', 'blog.views.base', name='base'),
-                       url(r'^$', 'blog.views.home', name='home'),
                        url(r'^demo/$', 'blog.views.demo', name='demo'),
                        # url(r'^blog/(?P<slug>[-\w]+)/$', 'blog.views.blog', name='blog'),
                        url(r'^blog/(?P<id_blog>\d+)/$', 'blog.views.blog', name='blog'),

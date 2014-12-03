@@ -7,7 +7,7 @@
         <input class="btn-u" type="submit" value="Search">
     </form>
     {% if query %}
-        <h2>Results for "{{ query|escape }}":</h2>
+        <h2>Resultados de la consulta "{{ query|escape }}"</h2>
         {% if results %}
             <ul>
                 {% for blog in results %}
