@@ -41,7 +41,7 @@ class Blog(models.Model):
     position = models.CharField(max_length=1, choices=POSITION_CHOICES)
     categoria = TaggableManager(through=TaggedCategory, verbose_name="Categoria")
     categoria.rel.related_name = '+'
-    comentar = models.BooleanField(default=True)
+    comentar = models.BooleanField(default=False)
     tags = TaggableManager(through=TaggedTag)
     tags.rel.related_neme = "-"
 
@@ -62,13 +62,7 @@ class comentarios(models.Model):
     cuerpo = models.TextField(verbose_name="Comentario", max_length=80)
     fecha_pub = models.DateTimeField(auto_now_add=True, editable=False)
 
-    def __unicode__(self):
-        return "%s --> Lo hizo %s --> Hora:  %s" % ( self.Blog, self.nombre, self.fecha_pub)
-
 
 class rating(models.Model):
     Blog = models.ForeignKey(Blog)
     calificacion = models.IntegerField(default=0)
-
-    def __unicode__(self):
-        return "%s----%s" % (self.Blog, self.calificacion)

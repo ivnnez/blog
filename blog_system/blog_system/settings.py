@@ -125,6 +125,8 @@ LOGGING = {
     }
 }
 
+DEFAULT_CHARSET = 'utf-8'
+
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
 MEDIA_URL = '/media/'

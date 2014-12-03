@@ -5,3 +5,5 @@ LISTA DE COSAS QUE FALTAN POR HACER PARA EL BLOG
 - Que al agregar un post en el admin los compos de tags y categotias se vean correctamente.
 
 - Que solo se muestren los ultimos comentarios (usar un div con scroll o  Paginacion)
+
+- al entrar al admin y tratar de ver los comentarios no deja marca error de codificacion REVISAR peobra comentando con caracteres extrenios comas y demas, igual para rating
