@@ -9,7 +9,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.db.models import Sum, Count
 from django.db.models import Q
-
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 def base(request):
     Descripcion = settings.SITE_DESCRIPTION
@@ -21,7 +21,7 @@ def base(request):
     return TemplateResponse(request, "base.html")
 
 
-def home(request):
+def home(request,pagina='f'):
     cate = Blog.categoria.all()
     # filtramos los blogs para no enviar todo a la pagina ordenamos 'time' para enviar los mas recientes
     
@@ -34,7 +34,21 @@ def home(request):
         pass
     blogsP1 = Blog.objects.filter(status='P', position='1').order_by('-time')[:1]
     blogsP2 = Blog.objects.filter(status='P', position='2').order_by('-time')[:4]
-    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('-time')
+    Lista_blogsP3 = Blog.objects.filter(status='P', position='3').order_by('-time')
+    paginator = Paginator(Lista_blogsP3,1)
+
+    print pagina
+
+    try:
+        page = int(pagina)
+        print "lllllll"+page
+    except:
+        page = 1
+        print page
+    try:
+        blogsP3 = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        blogsP3 = paginator.page(paginator.num_pages)
     blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     return TemplateResponse(request, "home.html", {'blogsP1': blogsP1, 'blogsP2': blogsP2, 'blogsP3': blogsP3,
                                                    'blogsRecientes': blogsRecientes, 'cate': cate})

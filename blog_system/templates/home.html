@@ -70,6 +70,17 @@
             </div>
         {% endfor %}
     </div>
+    {% if blogsP3.has_previous %}
+            <a class="btn-u" href="/{{ blogsP3.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="btn-u">
+            Page {{ blogsP3.number }} of {{ blogsP3.paginator.num_pages }}.
+    </span>
+
+    {% if blogsP3.has_next %}
+            <a class="btn-u" href="/{{ blogsP3.next_page_number }}">next</a>
+    {% endif %}
     <!-- End Recent Works -->
 {% endblock %}
 {% block RecentBlogs %}
