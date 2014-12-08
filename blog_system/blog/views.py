@@ -21,7 +21,7 @@ def base(request):
     return TemplateResponse(request, "base.html")
 
 
-def home(request,pagina='f'):
+def home(request):
     cate = Blog.categoria.all()
     # filtramos los blogs para no enviar todo a la pagina ordenamos 'time' para enviar los mas recientes
     
@@ -34,24 +34,27 @@ def home(request,pagina='f'):
         pass
     blogsP1 = Blog.objects.filter(status='P', position='1').order_by('-time')[:1]
     blogsP2 = Blog.objects.filter(status='P', position='2').order_by('-time')[:4]
-    Lista_blogsP3 = Blog.objects.filter(status='P', position='3').order_by('-time')
-    paginator = Paginator(Lista_blogsP3,1)
-
-    print pagina
-
-    try:
-        page = int(pagina)
-        print "lllllll"+page
-    except:
-        page = 1
-        print page
-    try:
-        blogsP3 = paginator.page(page)
-    except(EmptyPage, InvalidPage):
-        blogsP3 = paginator.page(paginator.num_pages)
+    blogsP3 = Blog.objects.filter(status='P', position='3').order_by('-time')[:3]
     blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
     return TemplateResponse(request, "home.html", {'blogsP1': blogsP1, 'blogsP2': blogsP2, 'blogsP3': blogsP3,
                                                    'blogsRecientes': blogsRecientes, 'cate': cate})
+def blogs(request, pagina):
+    cate = Blog.categoria.all()
+    blogsRecientes = Blog.objects.filter(status='P').order_by('-time')[:4]
+
+    Lista= Blog.objects.filter(status='P').order_by('-time')
+    paginator = Paginator(Lista,3)
+    try:
+        page = int(pagina)
+    except:
+        page = 1
+    try:
+        blogspaginados= paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        blogspaginados = paginator.page(paginator.num_pages)
+
+    return TemplateResponse(request, "blogs.html", {'blogspaginados':blogspaginados, 'blogsRecientes': blogsRecientes, 'cate': cate})
+
 
 
 def blog(request, id_blog):
