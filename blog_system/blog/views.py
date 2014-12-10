@@ -3,13 +3,17 @@ from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
 from .models import Blog, comentarios, rating  # poner tag si se necesita, en el blog tag=blog.tag.all(), 'tag':tag
 from django.shortcuts import render_to_response
-from forms import ComentarioForm, ContactForm, ratingForm
+from forms import ComentarioForm, ContactForm, ratingForm, LoginForm
 from django.template import RequestContext
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.db.models import Sum, Count
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.views.generic.edit import FormView
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login, logout
+
 
 def base(request):
     Descripcion = settings.SITE_DESCRIPTION
@@ -168,3 +172,22 @@ def busqueda(request):
     else:
         results = []
     return render_to_response("busqueda.html", {"results": results, "query": query, 'cate':cate, 'blogsRecientes':blogsRecientes})
+
+
+class LoginView(FormView):
+    template_name = 'login.html'
+    form_class = LoginForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        usuario = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        usuario = authenticate(username=usuario, password=password)
+        if usuario is not None and usuario.is_active:
+            login(self.request, usuario)
+        return super(LoginView, self).form_valid(form)
+
+
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect('/')

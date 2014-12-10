@@ -18,3 +18,8 @@ class ratingForm(forms.ModelForm):
     class Meta:
         model = rating
         fields = ('calificacion',)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Usuario", widget=forms.TextInput())
+    password = forms.CharField(label="Password", widget=forms.PasswordInput(render_value=False))

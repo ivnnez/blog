@@ -3,6 +3,7 @@ from blog_system import settings
 from blog.feeds import EntradasFeed
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from blog.views import LoginView
 
 admin.autodiscover()
 
@@ -10,6 +11,8 @@ urlpatterns = patterns('',
                        # url(r'^$', 'django.contrib.auth.views.login',{'template_name':'login.html',name='login'}),
                        # url(r'^cerrar/$', 'django.contrib.auth.views.logout',{'template_name':'login.html',name='login'}),
                        # url de inicio antes de implementar el loggin
+                       url(r'login/$', LoginView.as_view(), name='login'),
+                       url(r'logout/$', 'blog.views.log_out', name='logout'),
                        url(r'^$', 'blog.views.home', name='home'),
                        url(r'^blogs/(?P<pagina>\d+)/$', 'blog.views.blogs', name='blogs'),
                        url(r'^categorias/(?P<id_categoria>\d+)/$', 'blog.views.categorias', name='categorias'),

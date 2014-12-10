@@ -78,7 +78,11 @@
                 <li class="topbar-devider"></li>
                 <li><a href="page_faq.html">Help</a></li>
                 <li class="topbar-devider"></li>
-                <li><a href="page_login.html">Login</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/logout/">Salir</a></li>
+                {%else%}
+                    <li><a href="/login/">Entrar</a></li>
+                {%endif%}
             </ul>
             <!-- End Topbar Navigation -->
         </div>
