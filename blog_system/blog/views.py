@@ -36,6 +36,13 @@ def home(request):
         b.save()
     except:
         pass
+    try:
+        a= Blog.objects.filter(position=2,status='P')[4].pk
+        b=Blog.objects.get(id=a)
+        b.position='3'
+        b.save()
+    except:
+        pass
     blogsP1 = Blog.objects.filter(status='P', position='1').order_by('-time')[:1]
     blogsP2 = Blog.objects.filter(status='P', position='2').order_by('-time')[:4]
     blogsP3 = Blog.objects.filter(status='P', position='3').order_by('-time')[:3]
